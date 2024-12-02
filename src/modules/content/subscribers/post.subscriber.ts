@@ -1,8 +1,8 @@
 import { DataSource, EventSubscriber } from 'typeorm';
-import { SanitizeService } from '@/modules/content/services';
 import { PostRepository } from '@/modules/content/repositories';
 import { PostEntity } from '@/modules/content/entities';
 import { PostBodyType } from '@/modules/content/constants';
+import { SanitizeService } from '@/modules/content/services/sanitize.service';
 
 @EventSubscriber()
 export class PostSubscriber {
