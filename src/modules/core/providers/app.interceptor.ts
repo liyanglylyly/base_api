@@ -1,4 +1,3 @@
-// src/modules/core/providers/app.interceptor.ts
 import {
   ClassSerializerInterceptor,
   PlainLiteralObject,

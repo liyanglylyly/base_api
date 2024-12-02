@@ -16,7 +16,9 @@ import { toBoolean } from '@/modules/core/helpers';
 import { PostOrderType } from '@/modules/content/constants';
 import { isNil, toNumber } from 'lodash';
 import { PartialType } from '@nestjs/swagger';
+import { DtoValidation } from '@/modules/core/decorators/dto-validation.decorator';
 
+@DtoValidation({ type: 'query' })
 export class QueryPostDto implements PaginateOptions {
   @Transform(({ value }) => toBoolean(value))
   @IsBoolean()
@@ -50,6 +52,7 @@ export class QueryPostDto implements PaginateOptions {
   tag?: string;
 }
 
+@DtoValidation({ groups: ['create'] })
 export class CreatePostDto {
   @MaxLength(255, {
     always: true,
@@ -112,6 +115,7 @@ export class CreatePostDto {
 /**
  * 文章更新验证
  */
+@DtoValidation({ groups: ['update'] })
 export class UpdatePostDto extends PartialType(CreatePostDto) {
   @IsUUID(undefined, { groups: ['update'], message: '文章ID格式错误' })
   @IsDefined({ groups: ['update'], message: '文章ID必须指定' })
