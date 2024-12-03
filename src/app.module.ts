@@ -2,15 +2,16 @@ import { Module } from '@nestjs/common';
 import { ContentModule } from '@/modules/content/content.module';
 import { CoreModule } from '@/modules/core/core.module';
 import { DatabaseModule } from '@/modules/database/database.module';
-import { database } from '@/config/database.config';
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { AppFilter, AppInterceptor, AppPipe } from '@/modules/core/providers';
+import { ConfigureModule } from '@/modules/config/configure.module';
 
 @Module({
   imports: [
     ContentModule,
     CoreModule.forRoot(),
-    DatabaseModule.forRoot(database),
+    DatabaseModule.forRoot(),
+    ConfigureModule,
   ],
   providers: [
     {
