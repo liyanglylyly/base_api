@@ -12,6 +12,7 @@ import {
 import type { Relation } from 'typeorm';
 import { Exclude, Expose, Type } from 'class-transformer';
 import { PostEntity } from '@/modules/content/entities/post.entity';
+import { UserEntity } from '@/modules/user/entities';
 
 @Entity('comment')
 @Tree('materialized-path')
@@ -52,4 +53,12 @@ export class CommentEntity extends BaseEntity {
   @Type(() => CommentEntity)
   @TreeChildren({ cascade: true })
   children: Relation<CommentEntity>[];
+
+  @Expose()
+  @ManyToOne(() => UserEntity, (user) => user.comments, {
+    nullable: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  author: Relation<UserEntity>;
 }

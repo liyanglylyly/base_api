@@ -1,4 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
+import { UniqueExistConstraint } from '@/modules/core/constrants/unique.exist.constraint';
 
 @Module({})
 export class CoreModule {
@@ -6,8 +7,8 @@ export class CoreModule {
     return {
       module: CoreModule,
       global: true,
-      providers: [],
-      exports: [],
+      providers: [UniqueExistConstraint],
+      exports: [UniqueExistConstraint],
     };
   }
 }

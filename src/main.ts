@@ -4,6 +4,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { useContainer } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -15,8 +16,11 @@ async function bootstrap() {
     },
   );
   app.setGlobalPrefix('api');
+  useContainer(app.select(AppModule), {
+    fallbackOnErrors: true,
+  });
   await app.listen(3000, () => {
-    console.log('api: http://localhost:3100');
+    console.log('api: http://localhost:3000');
   });
 }
 bootstrap().then((r) => {});

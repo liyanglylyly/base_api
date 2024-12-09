@@ -16,6 +16,7 @@ import { Exclude, Expose, Type } from 'class-transformer';
 import { CategoryEntity } from '@/modules/content/entities/category.entity';
 import { TagEntity } from '@/modules/content/entities/tag.entity';
 import { CommentEntity } from '@/modules/content/entities/comment.entity';
+import { UserEntity } from '@/modules/user/entities';
 
 @Entity('post')
 @Exclude()
@@ -100,4 +101,12 @@ export class PostEntity extends BaseEntity {
     cascade: true,
   })
   comments: Relation<CommentEntity>[];
+
+  @Expose()
+  @ManyToOne(() => UserEntity, (user) => user.posts, {
+    nullable: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  author: Relation<UserEntity>;
 }
